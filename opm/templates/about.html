@@ -1,0 +1,55 @@
+
+{% extends "base.html" %}
+
+
+{% block content %}
+
+<div class="container">
+    <div class="jumbotron">
+        <h1>About Extra Eyes</h1>
+        <p>What is all this, then?</p>
+    </div>
+    <div class="row">
+        <h2>Introduction</h2>
+        <p>This tool is intended to encourage substantive revision.</p>
+        <p>When a user uploads a nonfiction document, a report is produced.</p>
+        <p>The report includes an array of information based on an algorithmic
+         analysis of the prose.</p>
+    </div>
+    <div class="row">
+        <h2>Analysis</h2>
+        <p>The analysis provides a non-presecriptive, statistical overview of
+        the document, intended to support writing instructors as they guide students
+         through the substantive revision stage of the writing process.</p>
+        <p>The report may be used as supporting data driving the creation of individual
+        written expression and mechanics goals and objectives to focus on in class
+        and to document in an IEP, for example.</p>
+        <p>Additionally, by uploading final submission drafts of students' work,
+        the instructor may use the reports to track progress toward individualized
+        goals and objectives over time.</p>
+        <p>The majority of the report is intended to support an instructor's decision
+        making regarding how to guide a student toward successful revision -- no concrete
+         suggestions are provided.</p>
+        <p>In the conclusion of the report, however, some more concrete support may be
+         provided: for example, cliches may be identified and changes recommended.</p>
+    </div>
+    <div class="row">
+      <h2>Samples</h2>
+      <h3>Submitted Prose</h3>
+        <p><img class="img-responsive" src="../static/sample-doc.png"></p>
+      <h3>Report</h3>
+        <p><img class="img-responsive" src="../static/sample_report-a.png"></p>
+        <p><img class="img-responsive" src="../static/sample-report-b.png"></p>
+        <p><img class="img-responsive" src="../static/sample-report-c.png"></p>
+
+<div class="row">
+
+
+<h2>Credits</h2>
+<ul>
+    <li><a href="http://proselint.com/"><strong>Proselint</strong></a> is phenomenal piece of code that provides the concrete style considerations at the conclusion of the results. Proselint is <a href="https://en.wikipedia.org/wiki/BSD_licenses">BSD licensed</a>. Read more at <a href="http://proselint.com/">http://proselint.com/</a>; see the code base <a href="https://github.com/amperser/proselint">here.</a>. (By <a href="https://github.com/amperser">Amperser Labs</a>.)</li>
+    <li>The passive voice identification done here is possible because of the <a href="https://github.com/j-c-h-e-n-g/nltk-passive-voice"><strong>nltk-passive voice</strong></a> code provided by jcheng at <a href="https://github.com/j-c-h-e-n-g/nltk-passive-voice">Github</a>.
+</ul>
+</div>
+</div>
+{% endblock %}

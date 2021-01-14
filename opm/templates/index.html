@@ -1,0 +1,172 @@
+{% extends "base.html" %}
+
+
+
+
+
+{% block content %}
+
+  <div class="container">
+    <div class="jumbotron">
+      <img class="pull-right img-responsive" src="/static/images/logo.png" width="10%">
+      <h1>Open Prose Metrics</h1>
+
+      <p>Upload an essay for analysis <small>(<strong>.docx</strong>, .txt, .odt, .doc, .pdf, .rtf).</small></p>
+      <ul class="nav nav-pills">
+        <li role="presentation"><a class="btn btn-default"
+           href="/upload">Upload Text</a></li>
+        <li role="presentation"><a
+           href="/paste" class="btn btn-default">Paste Text</a></li>
+        <li role="presentation"><a
+           href="/url" class="btn btn-default">Scrape URL</a></li>
+      </ul>
+      </div>
+
+    </div>
+   
+  <div class="container">
+  {% with messages = get_flashed_messages(with_categories=True) %}
+  {% if messages %}
+    <div class="row">
+      <div class="col-md-12">
+
+      </div>
+    </div>
+  {% endif %}
+  {% endwith %}
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+        <h2>On Writing</h2>
+        <em><block>
+                A certain change in the emphasis on having and being is apparent in
+                the growing use of nouns and the decreasing use of verbs in Western languages
+                in the past few centuries. A noun is the proper denotation for a thing.
+                I can say that I have things: for instance that I have a table, a house, a book, a car.
+            <br /><br />
+                The proper denotation for an activity, a process, is a verb: for instance I am, I love,
+                I desire, I hate, etc. Yet ever more frequently an activity is expressed in terms of having;
+                that is, a noun is used instead of a verb. But to express an activity by to have in connection with a noun is an erroneous use of language,
+                because processes and activities cannot be possessed; they can only be experienced.
+           </block></em>
+           <br />
+           <p class=pull-right>--Erich Fromm</p>
+
+         </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+      <h2>Purpose and Vision</h2>
+      <p>Open Prose Metrics provides powerful insights for ELA and composition students, writing coaches, ELA teachers, and special education teachers.</p>
+      <p>The platform intends to support users looking for data-driven insights about writing while avoiding prescriptivist imperatives. Tasks for which users rely on this tool are broad:</p>
+      <ul>
+        <li>Develop data-driven written expression and mechanics goals and objectives</li>
+        <li>Inform decisions that shape substantive revision</li>
+        <li>Provide substantive, meaninful feedback for student writing based on data about submission drafts</li>
+        <li>Records progress in a written artifact over the course of the writing process.</li>
+        <li>Capture the development of a writer's skills over the course of a term.</li>
+        </ul>
+        
+        
+      
+        </div>
+        <div class="col-md-4">
+          <h2>Context</h2>
+          <p>OPM has been developed based on the creators' 35 years of combined experience working with secondary and post secondary students in the areas of composition, rhetoric, argumentation, research, and writing from sources. We have served as special and general educators for students with a variety of learning preferences.</p>
+          <p>Because of that foundation, the tool focuses on such diverse issues as concision and precision and basic sentence structure.</p>
+        </div>
+        <div class="col-md-4">
+          <h2>Coverage</h2>
+          <p>The following exemplify the scope of written expression, written mechanics, and rhetorical concerns the tools can address:</p>
+            
+            <ul>
+              
+              <li>Sentence structure and variety</li>
+              <li>Readability Indices as indicators of vocabliary acquisition, sentence boundary conventions, etc</li>
+              <li>Personalization/objectivity</li>
+              <li>Appropriate use of first- and second- person pronouns</li>
+              <li>Sentiment/Tone</li>
+              <li>Unity of purpose</li>
+              <li>Concision and wordiness, including deliberated use of passive, weak and modal verbs</li>
+              <li>Precision and word choice</li>
+              <li>Parts-of-speech distribution</li>
+              
+              </ul>
+            
+          </div>
+        </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <h2>Drive Substantive Revision with Data</h2>
+        <p>OPM is a tool to support substantive revision. It is data driven: making every effort not to be prescriptive, ExtraEyes is focused on providing data
+        that can offer insight that drives substantive revision. In almost any case, prescriptivist suggestions are available in other tools.</p>
+      </div>
+      <div class="col-md-4">
+        <h2>Submitting a Sample for Analysis</h2>
+        <p>Writing may be submitted via file upload, via paste, and by URL.</p>
+        <p>The most reliable way to analyze a file is to <em>upload</em> a document in .docx format.</p>
+        <p>Other acceptable formats include: .doc, .odt, .txt, .rtf.</p>
+        <p>In paste mode, the user can paste plaintext into a field and submit it for analsis. This is a reliable way to submit.</p>
+        <p>URL scraping is not a reliable feature yet. It works great on some pages, but either rejects or mungs other pages</p>
+      </div>
+      <div class="col-md-4">
+        <h2>Notes of Some Significance</h2>
+        <ul>
+          <li>This tool only works with documents written in English. If it detects a document in a different language,
+            it will return you to a fresh upload form.</li>
+          <li>OPM works best with files uploaded in .docx format. <em>However</em>,
+            it also accepts uploads of PDFs (with text), .txt plaintext files, and .odt documents from LibreOffice, for example.
+            Do note, however, that spaces between words, apostrophes, and quote marks may not be interpreted as well as they are for .docx files. Some munging may occur.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+        <h2>Lard Data</h2>
+        <p>Data to support revision using <a href="https://owl.purdue.edu/owl/subject_specific_writing/writing_in_engineering/indot_workshop_resources_for_engineers/documents/20080306044511_727.pdf" target="_blank">Lanham's Paramedic Method</a>. To learn more about Lanham and the Paramedic Revision Method, explore the links below:
+        <ul><li><a href="https://people.umass.edu/curtis/academics/editingtoolbox/Lanham_LardFactor.pdf
+        " target="_blank">Workshop</a></li>
+        <li><a href="http://faculty.winthrop.edu/kosterj/WRIT465/slide%20shows/lardoutline_files/frame.htm" target="_blank">Presentation</a></li>
+        <li><a href="http://people.vetmed.wsu.edu/jmgay/courses/documents/TheParamedicMethod.pdf
+        " target="_blank">Workshop 2</a></li>
+        <li><a href="https://www.amazon.com/Revising-Prose-5th-Richard-Lanham/dp/0321441699/ref=asap_bc?ie=UTF8" target="_blank">Lanham's <em>Revising Prose (5th Ed.)</em> on Amazon</a></li>
+        </ul>
+    </div>
+    <div class="col-md-4">
+        <h2>Text Statistics</h2>
+        <p>Get vital statistics about your document to reveal patterns and practices, and use them to make well-deliberated revisions.</p>
+    </div>
+    <div class="col-md-4">
+        <h2>Readability Scores</h2>
+        <p><a href="http://www.analyzemywriting.com/readability_indices.html" target="_blank">Readabily scores/indexes</a> are usually used to help us write down for our audiences in an effort to reduce confusion.</p>
+        <p>However, each index, looked at with the text statistics, can offer us powerful insights regarding writing;
+          they may reveal breadth and depth of relevant content-area vocabulary, a strong ability to mix sentence types, or opportunities to improve sentence variety, for example.</p>
+
+    </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <h2>Style Checks</h2>
+            <p>The anaylsis of the submitted text includes <a href="http://proselint.com/checks/" target="_blank">style suggestions</a> to be considered (or disregarded).</p>
+        </div>
+
+        <div class="col-md-4">
+          <h2>Coming Soon!</h2>
+          <p>Track student progress on final revisions over time</p>
+        </div>
+        <div class="col-md-4">
+          <h2>Usage Notes</h2>
+          <ul>
+            <li>Try pasting exemplary college essays shared by Johns Hopkins' office of admissions into a document (in .docx format): <a href="https://apply.jhu.edu/application-process/essays-that-worked/" target="_blank">https://apply.jhu.edu/application-process/essays-that-worked/</a></li>
+            <li>Try your upload again if it fails the first time, please. If it still fails, please try a different file or upload the same document in a different format.</li>
+
+
+
+
+          </ul>
+    </div>
+</div>
+
+{% endblock %}

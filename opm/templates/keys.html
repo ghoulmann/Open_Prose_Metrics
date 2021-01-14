@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+
+{% block page_content %}
+
+<table class="table table-striped">
+<tr><th>&nbsp;</th><th>Record Key</th></tr>
+{% for k in keys %}
+<tr><td width="5%"><big><span data-toggle="tooltip" data-placement="top" title="Load Record" class="glyphicon glyphicon-floppy-open"></span></big></td><td><a href="{{ url_for('show_record', key = k)}}">{{ k }}</td></tr>
+{% endfor %} 
+
+
+</table>
+{% endblock %}
+{% endblock %}

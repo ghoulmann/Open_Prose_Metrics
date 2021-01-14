@@ -1,0 +1,1241 @@
+{% extends "feedback-base.html" %}
+<link rel="stylesheet" href="/static/styles/peer.css">
+
+{% block title %}
+ Report: {% if object.file_name %}{{
+  object.file_name[0:20] }} {% elif object.title %}{{ object.title[0:30] }}{% else
+  %} Pasted Text @ {{object.time_stamp}} {% endif %}
+{% endblock %}
+
+
+
+
+{% block content %}
+
+<div class="container">
+ 
+  
+
+<div class="container">
+    <div class="jumbotron">
+      <img class="pull-right img-responsive hidden-print" src="/static/images/silcrow.png" width="10%">
+      
+      <h1><small>Report</small></h1>
+      <h2>{% if object.file_name %}{{
+  object.file_name[0:20] }} {% elif object.title %}{{ object.title[0:20] }}{% else
+  %} Pasted Text @ {{object.time_stamp}} {% endif %}</h2>      
+    </div>
+
+   
+  <section id="report_info">
+
+    
+
+    <h1>About this Report </h1>
+
+    <div class="container" id="report_summary">
+      <div class="row">
+        <div class="col-md-4 text-center">
+          <div class="panel panel-primary">
+            <div class="panel-heading">
+              <h3 class="panel-title">File Name</h3>
+            </div>
+            <div class="panel-body">
+              {% if object.file_name %}{{ object.file_name }} {% else %} Not
+              Applicable {% endif %}
+            </div>
+          </div>
+        </div><!--close col 1-->
+        <div class="col-md-4 text-center">
+          <div class="panel panel-primary">
+            <div class="panel-heading">
+              <h3 class="panel-title">Report Time Stamp</h3>
+            </div>
+            <div class="panel-body">
+              {{ object.time_stamp }}
+            </div>
+          </div>
+        </div><!--close col 2-->
+        <div class="col-md-4 text-center">
+          <div class="panel panel-primary">
+            <div class="panel-heading">
+              <h3 class="panel-title">Administrator</h3>
+            </div>
+            <div class="panel-body">
+              <p>{% if object.administrator %}
+                {{ object.administrator }}
+                {% else %}
+                Administrator not identified
+                {% endif %}</p>
+            </div>
+          </div>
+        </div><!--close col 2-->
+      </div><!--close row-->
+      <div class="row">
+        <div class="col-md-8">
+          <div class="panel panel-primary">
+            <div class="panel-heading">
+              <h3 class="panel-title">Administration Notes</h3>
+            </div>
+            <div class="panel-body">
+
+              <p>{% if object.admin_notes %} {{ object.admin_notes }} {% else %}
+                No notes available. {% endif %}</p>
+
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="panel panel-primary">
+            <div class="panel-heading">
+              <h3 class="panel-title">Subject <small>(determined by weight and
+                  frequency)</small></h3>
+            </div>
+            <div class="panel-body"><p align="center">{{ object.subject }}</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="essay_info">
+    <h1>About the Writing Sample</h1>
+    <div class="container">
+
+      <div class="row">
+
+        <div class="col-md-6">
+          <table class="table table-striped">
+            <theader>
+              <th>Description</th><th>Value</th>
+            </theader>
+            <tbody>
+              <tr><td>Author</td><td>{% if object.author %}{{ object.author }}
+                  {% else %} Unidentified {% endif %}</td></tr>
+              <tr><td>File Name</td><td>{% if object.file_name %}{{
+                  object.file_name }} {% else %} Not Applicable {% endif %}</td></tr>
+              <tr><td>Word Count</td><td>{{ object.word_count }}</td></tr>
+              <tr><td>Sentence Count</td><td>{{ object.sentence_count }}</td></tr>
+              <tr><td>Unique Words</td><td>{{ object.unique_words }}</td></tr>
+              <tr><td>Paper Sides</td><td>{{ object.paper_count }}</td></tr>
+              <tr><td>Page Count</td><td>{{ object.page_length }}</td></tr>
+              <tr><td>Time to Read</td><td>{{ object.toRead }}</td></tr>
+              <tr><td>Description</td><td>{{ object.description }}</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="col-md-6">
+          <div class="panel panel-primary">
+            <div class="panel-heading">
+              <h3 class="panel-title">Text Summary</h3>
+            </div>
+            <div class="panel-body">
+              {% if object.summary %}
+              <p>{{ object.summary }}</p>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+      {% if object.hashtags %}
+      <div class="row">
+        <div class="col-md-12">
+          <div class="panel panel-primary">
+            <div class="panel-heading">
+              <h3 class="panel-title">Recommended Tags</h3>
+            </div>
+            <div class="panel-body">
+              <p>
+                {% for hashtag in object.hashtags %}
+                <span class="label label-primary">
+                  {{ hashtag }}
+                </span> &nbsp;
+                {% endfor %}
+
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endif %}
+    </div>
+  </section>
+
+
+
+  <section id="readability">
+    <h1>Readability <small>Text Complexity</small></h1>
+    <div class="container">
+
+      <div class="row">
+        <!--<div class="container">-->
+        <div class="col-md-6">
+
+          <h3>Grade Level {% if object.readability_standard != "null" %}<span class="label label-primary">{{
+              object.readability_standard }}</span>{% endif %}</h3>
+
+
+
+          <table class="table table-striped">
+            <theader>
+              <th>Name</th>
+              <th>Grade Equivalent</th>
+            </theader>
+            <tbody>
+              <tr><td>Flesch-Kincaid Reading Grade</td><td>{{
+                  object.readability_fleschkincaid }}</td></tr>
+              <tr><td>Coleman Liau Index</td><td>{{
+                  object.readability_coleman_liau }}</td></tr>
+              <tr><td>SMOG Index</td><td>{{ object.readability_smog }}</td></tr>
+              <tr><td>New Dale Chall</td><td>{{ object.readability_dale_chall }}</td></tr>
+              <tr><td>Linsear Write</td><td>{{ object.readability_linsear_write
+                  }}</td></tr>
+              <tr><td>Gunning Fog</td><td>{{ object.readability_gunningfog }}</td></tr>
+               <tr><td>Forcast</td><td>{{ object.readability_forcast[0] }}</td></tr>   
+              <tr><td>Automated Readability Index</td><td>{{
+                  object.readability_ari }}</td></tr>
+                  {% if object.readability_standard != "null" %}
+                  <tr><td>Readability Standard (Composite)</td><td>{{
+                  object.readability_standard }}</td></tr>
+                  {% endif %}
+            </tbody>
+          </table>
+        </div>
+
+        <div class="col-md-6">
+
+          <h3>Reading Ease <span class="label label-primary">{{
+              object.flesch_re_desc_str }}</h3>
+
+
+
+            <table class="table">
+              <theader>
+                <th>Name</th>
+                <th>Score</th>
+              </theader>
+              <tbody>
+                <tr><td>LIX</td><td>{{ object.readability_lix }} (grade: {{  object.readability_lix_grade }})</td></tr>
+                <tr><td>Flesch-Kincaid Reading Reading Ease</td><td>{{
+                    object.readability_flesch_re }} ({{
+                    object.flesch_re_desc_str }})</td></tr>
+                <tr><td>Lexile Approximation</td><td>{{ object.lexile }}</td></tr>
+                
+              </tbody>
+            </table>
+            <div class="alert alert-warning" role="alert">
+              <strong>To Do</strong> <!-- TODO:  --> Include note on what we can
+              gleen from readability indexes with <a href="#">links</a>. <!-- TODO:  -->
+              Round index results to hundredths.
+            </div>
+
+          </div>
+        </div>
+<p class="hidden-print float-right"><a class="pull-right" href="#"
+            title="Back to top">Back to top</a></p>
+
+        <div class="row">
+          <div class="col-md-12">
+            <p> </p>
+            <div class="panel panel-primary">
+              <div class="panel-heading">
+                <h3 class="panel-title">Readability Factors</h3>
+
+              </div>
+              <div class="panel-body">
+                <table class="table">
+                  <theader>
+                    <th>Description</th><th>Value</th>
+                  </theader>
+                  <tbody>
+                    <tr>
+                      <td>Average Sentence Length</td>
+                      <td>{{ object.avg_sentence_length}}</td>
+                    </tr>
+                    <tr>
+                      <td>Average Syllables per Word</td>
+                      <td>{{ object.avg_syllables_per_word }}</td>
+                    </tr>
+                    <tr>
+                      <td>Polysyllables</td>
+                      <td>{{ object.polysyllabcount }}</td>
+                    </tr>
+                    <tr>
+                      <td>Sentence &gt; 20 Words</td>
+                      <td>{{ object.long_sentences }}</td>
+                    </tr>
+                    <tr>
+                      <td>Sentence &gt; 30 Words</td>
+                      <td>{{ object.very_long_sentences }}</td>
+                    </tr>
+                    <tr>
+                      <td>Difficult Words (New Dale Chall)</td>
+                      <td>{{ object.difficult_words }} </td>
+                    </tr>
+                    <tr>
+                      <td>Lexicon Count (all words counted)</td>
+                      <td>{{ object.lexicon_count }} </td>
+                    </tr>
+                    <tr>
+                      <td>Unique Words (no duplicates counted)</td>
+                      <td>{{ object.unique_words }} </td>
+                    </tr>
+                  </tbody>
+                </table>
+		<p class="hidden-print float-right"><a class="pull-right" href="#"
+            title="Back to top">Back to top</a></p>
+                <!--</div>-->
+              </div>
+            </div>
+          </div>
+
+        </div><!-- row -->
+        <div class="row">
+          <div class="col-md-12">
+            <div class="row" id="readability-plot">
+              <div class="col-md-12">
+                <div class="panel panel-primary">
+                  <div class="panel-heading">
+                    <h3 class="panel-title">
+                      Readability Scales {% if object.readability_standard != "null" %}<span class="label label-success">{{
+                        object.readability_standard }}</span>{% endif %}
+                    </h3>
+                  </div>
+                  <div class="panel-body">
+                    {% autoescape false %}
+                    {{ object.plot_read }}
+                    {% endautoescape %}
+
+
+        <p class="hidden-print float-right"><a class="pull-right" href="#"
+            title="Back to top">Back to top</a></p>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--</div>-->
+      </div>
+    </section>
+
+    <section id="tone">
+      <h1>Tone &amp; Voice</h1>
+      <div class="container">
+
+        <div class="row">
+          {% if object.gender %}
+          <div class="col-md-3">
+            {% else %}
+            <div class="col-md-4">
+              {% endif %}
+              <p class="text-center"><strong>Polarity</strong> <span
+                  class="label label-primary">{{ object.polarity }}</span><br
+                  \>
+                <small><em>-0.1 to +1.0</em></small>
+              </p>
+            </div>
+            <!--<div class="col-md-3">
+            {% if object.api_sentiment %}
+            <p class="text-center">
+            <p class="text-center">
+            <strong>Sentiment</strong> <span class="label label-primary">{{ object.api_sentiment }}</span><br />
+            <small>Possible values: <em>neg, neutral, pos</em> </small></p>
+            {% endif %}
+
+            <!-- todo:: eliminate abbrev for pos and neg
+        </div>-->
+            {% if object.gender %}
+            <div class="col-md-3">
+              {% else %}
+              <div class="col-md-4">
+                {% endif %}
+
+
+                <p class="text-center">
+                  <strong>Sentiment</strong> <span class="label label-primary">{{
+                    object.sentiment_score }}</span><br />
+                  <small>Possible values: <em>Range from -1.0 to 1.0 where -1.0
+                      in negative, .5 is neutral, and 1.0 is strongly positive.</em></small></p>
+              </div>
+
+
+              {% if object.gender %}
+              <div class="col-md-3">
+                {% else %}
+                <div class="col-md-4">
+                  {% endif %}
+
+                  <p class="text-center"><strong>Personalization</strong> <span
+                      class="label label-primary">{{ object.subjectivity
+                      }}</span><br />
+                    <small>0.0 through 1.0 (where 1.0 is very subjective)</small></p>
+                </div>
+                {% if object.gender %}
+                <div class="col-md-3 hidden-print">
+
+                  <div id="persona" class="container">
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-primary btn-medium"
+                      data-toggle="modal" data-target="#myModal">
+                      Persona Insights
+                    </button>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="myModal" tabindex="-1"
+                      role="dialog" aria-labelledby="myModalLabel">
+                      <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <button type="button" class="close"
+                              data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabel">Persona
+                              Insights</h4>
+                          </div>
+                          {% if object.gender %}
+                          <div class="modal-body">
+                            <p>Personality: {{ object.personality }}</p>
+                            <p>Gender Presentation: {{ object.gender }}</p>
+                            <p>Education Level: {{ object.edu }}</p>
+                            <p>Age Presentation: {{ object.age }}</p>
+
+                          </div>
+                          {% else %}
+                          <div class="modal-body">
+                            <p>Persona Insights are not available at this time.</p>
+                          </div>
+                          {% endif %}
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-default"
+                              data-dismiss="modal">Close</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+                {% endif %}
+              </div>
+
+
+              <div class="row" id="plot">
+                <div class="col-md-12">
+                  <div class="panel panel-primary">
+                    <div class="panel-heading">
+                      <h3 class="panel-title">
+                        Sentiment Plot by Sentence
+                      </h3>
+                    </div>
+                    <div class="panel-body">
+                      {% autoescape false %}
+                      {{ object.sentiment_plot }}
+                      {% endautoescape %}
+
+
+		      <p class="hidden-print float-right"><a class="pull-right" href="#"
+            title="Back to top">Back to top</a></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row" id="plot2">
+                <div class="col-md-12">
+                  <div class="panel panel-primary">
+                    <div class="panel-heading">
+                      <h3 class="panel-title">
+                        Personalization Plot by Sentence
+                      </h3>
+                    </div>
+                    <div class="panel-body">
+                      {% autoescape false %}
+                      {{ object.plot_subj }}
+                      {% endautoescape %}
+                      <p class="hidden-print float-right"><a class="pull-right" href="#"
+            title="Back to top">Back to top</a></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="panel panel-primary">
+                    <div class="panel-heading">
+                      <h3 class="panel-title">
+                        Perspective
+                      </h3>
+                    </div>
+                    <div class="panel-body">
+                      <!--<div class="container">-->
+                      <div class="row">
+                        <div class="col-md-6">
+                          {% if object.first_person %}
+                          <p><strong>First Person Pronouns </strong> &nbsp;
+                            {% if object.first_person_count %}
+                            <span class="label label-primary">{{
+                              object.first_person_count }}</span>
+                            {% endif %}
+                          </p>
+                          {% endif %}
+                          <ul>
+                            {% for pronoun in object.first_person %}
+                            <li>{{ pronoun }}</li>
+                            {% endfor %}
+                          </ul>
+
+                        </div>
+                        <div class="col-md-6">
+
+                          <p>
+
+                            <strong>Second-Person Pronouns</strong>
+                            &nbsp; <span class="label label-primary">{{
+                              object.second_person_count }}</span>
+                          </p>
+                          {% if object.second_person_count %}
+                          <ul>
+                            {% for pronoun in object.second_person %}
+                            <li>{{ pronoun }}</li>
+                            {% endfor %}
+                          </ul>
+
+                        </p>
+                        {% endif %}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div><!--close row-->
+          </div><!--close container-->
+          <p class="hidden-print float-right"><a class="pull-right" href="#"
+              title="Back to top">Back to top</a></p>
+          <!--</div>--><!--close countainer-->
+          <!--</div>-->
+
+          <!-- </div> -->
+        </section><!--end voice/tone-->
+
+
+
+        <section id="concision">
+          <h1>Concision and Precision</h1>
+
+          <div class="container">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="alert alert-warning" role="alert">
+                  <strong>Note</strong> Based on the paramedic method and other
+                  concepts by Richard Lanham &mdash; articulated <em>Revising
+                    Prose</em>...About 80% of a typical freshman essay for
+                  college composition is "lard" that can be eliminated during
+                  revision.
+                </div>
+              </div>
+            </div> <!-- close alert row first row-->
+
+
+            <div class="row">
+              <div class="col-md-8">
+                <div class="panel panel-primary">
+                  <div class="panel-heading">
+                    <h3 class="panel-title">Metrics</h3>
+                  </div>
+                  <div class="panel-body">
+                    <table class="table">
+                      <theader>
+                        <th>Description</th>
+                        <th>Results</th>
+                      </theader>
+                      <tbody>
+                        <tr>
+                          <td>Gerund Count</td>
+                          <td>{{ object.gerund_count }} <small>(over {{
+                              object.sentence_count }} sentences)</small></td>
+                        </tr>
+                        <tr>
+                          <td><em>-tion</em> affixes</td>
+                          <td>
+                            {{ object.tion_word_list[1] }} <small>(across {{
+                              object.sentence_count}} sentences)</small>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>Adverbs</td>
+                          <td>{{ object.adverb_count }} <small>(across {{
+                              object.sentence_count }} sentences)</small></td>
+                        </tr>
+                        <tr>
+                          <td>Adjectives</td>
+                          <td>{{ object.adjective_count }} <small>(across {{
+                              object.sentence_count }} sentences)</small></td>
+                        </tr>
+                        <tr>
+                          <td>adverbs:adjectives</td>
+                          <td>{{ object.adverb_to_adjective }} </td>
+                        </tr>
+                        <tr>
+                          <td>Weak sentence count <em>(with instances of <strong>to be</strong>)</em></td>
+                          <td>{{ object.weak_sentences_count }} <small>(over {{
+                              object.sentence_count }} sentences)</small></td>
+                        </tr>
+                        <tr>
+                          <td>Total <em>to be</em> instances</td>
+                          <td>
+                            {% if object.be_verb_tally %}
+                            {{ object.be_verb_tally }}
+                            {% endif %}
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>Ratio of <em>to be</em> instances to sentences</td>
+                          <td>
+                            {% if object.be_verb_tally %}
+                            {{ object.weak_verbs_to_sentences }}
+                            {% endif %}
+                          </td>
+                        
+                        </tr>
+                        <tr>
+                          <td>Other Modals <small>beyond the 23 helping verbs</small></td>
+                          <td>{{ object.other_modals }}</td>
+                        </tr>
+                        <tr>
+                          <td>Passive Sentences</td>
+                          <td>{{ object.passive_sentence_count }} <small>(over
+                              {{ object.sentence_count }} sentences)</small></td>
+                        </tr>
+                        <tr>
+                          <td>Percent Passive</td>
+                          <td>{{ object.percent_passive_round }}%</td>
+                        </tr>
+                        <tr>
+                          <td>Percent Weak</td>
+                          <td>{{ object.percent_weak_sentence_round }}%</td>
+                        </tr>
+                        <tr>
+                          <td>Prepositions</td>
+                          <td>{{ object.preposition_count}}<small> of {{
+                              object.word_count }} words</small></td>
+                          <tr>
+                            <td>Prepositions:sentences</td>
+                            <td>{{ object.prepositions_per_sentence }}
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="panel panel-primary">
+                      <div class="panel-heading">
+                        <h3 class="panel-title">Text Samples <small>(randomly
+                            selected)</small></h3>
+                      </div>
+                      <div class="panel-body">
+                        {% if object.passive_sentences %}
+                        <p><strong>Passive Sample</strong></p>
+                        <ul>
+                          <li>{{ object.rand_passive }}</li>
+                        </ul>
+                        {% endif %}
+                        {% if object.rand_weak_sentence %}
+                        <p><strong>"Weak" Sentence Sample</strong></p>
+                        <ul>
+                          <li>{{ object.rand_weak_sentence }}</li>
+                        </ul>
+                        {% endif %}
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-6">
+                    {% if object.modal_dist %}
+                    <div class="panel panel-primary">
+                      <div class="panel-heading">
+                        <h3 class="panel-title">Helping Verbs (other than <em>to
+                            be</em>)</h3>
+                      </div>
+                      <div class="panel-body">
+                        <p>
+                          {% for wv in object.modal_dist %}
+                          <span class="label label-primary">{{ wv }}</span>
+                          &nbsp;
+                          {% endfor %}
+                        </p>
+                      </div>
+                      {% endif %}
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+
+                    <div class="panel panel-primary">
+                      <div class="panel-heading">
+                        <h3 class="panel-title">Words with <em>-tion</em> Affix</h3>
+                      </div>
+                      <div class="panel-body">
+                        <p>
+                          {% for word_and_count in object.tion_word_list[0] %}
+                          <span class="label label-primary">{{ word_and_count }}</span>
+                          {% endfor %}
+                        </p>
+                      </div>
+                    </div>
+                  </div><!--close col-->
+                </div>
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="panel panel-primary">
+                      <div class="panel-heading">
+                        <h3 class="panel-title">Weasel Words</h3>
+                      </div>
+                      <div class="panel panel-body">
+                        <p>Weasel Word Count <span class="label label-danger">{{
+                            object.weasel_word_count }}</span></p>
+                        <p>
+                          {% for weasel in object.weasel_words %}
+                          <span class="label label-primary">{{ weasel }}</span>
+                          {% endfor %}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <p class="hidden-print float-right"><a class="pull-right"
+                    href="#" title="Back to top">Back to top</a></p>
+              </div><!--close container-->
+            </section><!--close concision container-->
+
+            <section id="unity">
+              <h1>Unity and Cohesion</h1>
+              <div class="container">
+
+                <div class="row">
+
+
+                  {% if object.longest_word_abstract %}
+                  <div class="col-md-6">
+                    {% else %}
+                    <div class="col-md-12">
+                      {% endif %}
+                      <div class="panel panel-primary">
+                        <div class="panel-heading">
+                          <h3 class="panel-title">Introduction &amp; Conclusion</h3>
+                        </div>
+                        <div class="panel-body">
+                          <p><strong>Introduction</strong></p>
+                          <p> {{ object.intro }}</p>
+                          <p><strong>Conclusion</strong></p>
+                          <p> {{ object.exit }} </p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-md-6">
+                      {% if object.longest_word_abstract %}
+                      <div class="panel panel-primary">
+                        <div class="panel-heading">
+                          <h3 class="panel-title">Longest Word</h3>
+                        </div>
+                        <div class="panel-body">
+                          <h3>{{ object.longest_word.replace(',', '') }}</h3>
+                          <p>{{ object.longest_word_abstract }}</p>
+                        </div>
+                      </div>
+                      {% endif %}
+                    </div>
+
+                  </div>
+
+
+                  <div class="row">
+                    {% if object.textgain_concepts %}
+                    <div class="col-md-4">
+                      {% else %}
+                      <div class="col-md-8">
+                        {% endif %}
+                        <div class="panel panel-primary">
+                          <div class="panel-heading">
+                            <h3 class="panel-title">Noun Phrases</h3>
+                          </div>
+                          <div class="panel-body">
+                            <p>
+                              {% for np in object.phrases %}
+                              <big><span class="label label-primary">{{ np }}
+                                </span> &nbsp;</big>
+                              {% endfor %}
+                            </p>
+                          </div><!-- end panel body -->
+                        </div><!--close panel-->
+                      </div><!--close col-->
+
+
+                      <!-- textgain-concepts -->
+                      {% if object.textgain_concepts %}
+                      <div class="col-md-4">
+                        <div class="panel panel-primary">
+                          <div class="panel-heading">
+                            <h3 class="panel-title">Concepts</h3>
+                          </div>
+                          <div class="panel-body">
+                            {% if object.textgain_concepts %}
+                            {% for concept in object.textgain_concepts %}
+                            <p>{{ concept }}</p>
+                            {% endfor %}
+                            {% else %}
+                            <div class="alert alert-warning">
+                              <strong>Apologies</strong> Concepts could not be
+                              identified at this time (too many requests in too
+                              short a time).</div>
+                            {% endif %}
+                          </div>
+                        </div>
+                      </div><!--end column-->
+                      {% endif %}
+                      <div class="row">
+                        <div class="col-md-4">
+                          <div class="panel panel-primary">
+                            <div class="panel-heading">
+                              <h3 class="panel-title">Top 20 Words by Frequency
+                              </h3>
+                            </div>
+                            <div class="panel-body">
+                              {% for word_occurence in object.top20words %}
+                              <p>{{ word_occurence[0] }} &nbsp; <span
+                                  class="label label-primary">{{
+                                  word_occurence[1] }}</span></p>
+                              {% endfor %}
+
+
+                            </div>
+                          </div>
+                        </div><!-- close col -->
+                      </div><!--close row-->
+                      <!-- </div>close container -->
+
+
+                      <!-- for named entities-->
+
+                      <!-- <div class="container"> -->
+                      <div class="row">
+                        <div class="col-md-12">
+                          {% if object.names_links %}
+                          <div class="panel panel-primary">
+                            <div class="panel-heading">
+                              <h3 class="panel-title">Named Entities<small>&nbsp;
+                                  Linked</small></h3>
+                            </div>
+                            <div class="panel-body"><p style="line-height:2.5">
+                                {% for tuple in object.names_links %}
+                                <a class="btn btn-primary btn-xs"
+                                  href="{{tuple[1]}}" target="_blank">{{tuple[0]}}</a>
+                                {% endfor %}</p>
+                            </div>
+                          </div>
+                          {% endif %}
+
+                        </div><!--End col-->
+                      </div><!--end row-->
+
+
+
+
+                      <div class="row">
+                        <div class="col-md-12">
+                          <p class="hidden-print float-right"><a
+                              class="pull-right"
+                              href="#" title="Back to top">Back to top</a></p>
+                        </div>
+                      </div>
+                    </div>
+                  </section><!--  close unity and cohesion -->
+
+                  <section id="prescription">
+                    <h1>Style and Prescription</h1>
+                    <div class="container">
+
+
+
+                      <div class="row">
+                        <div class="col-md-4">
+                          <table class="table">
+                            <theader>
+                              <th>Punctuation</th>
+                              <th>Count</th>
+                            </theader>
+                            <tbody>
+                              <tr>
+                                <td>Comma Count</td>
+                                <td>{{ object.commas }} <small>(over {{
+                                    object.sentence_count }} sentences)</small></td>
+                              </tr>
+                              <tr>
+                                <td>Semicolon Count</td>
+                                <td>{{ object.semicolons }} <small>(over {{
+                                    object.sentence_count }} sentences)</small></td>
+                              </tr>
+                              <tr>
+                                <td>Coordinating Conjunctions</td>
+                                <td>{{ object.cc_count }} <small>(over {{
+                                    object.sentence_count }} sentences)</small></td>
+                              </tr>
+                              <tr>
+                                <td>Compound or Compound-Complex Sentences</td>
+                                <td>{{ object.compound_sentence_count }}
+                                  <tr>
+                                    <td>Subordinating Conjunctions (or
+                                      prepositions)</td>
+                                    <td>{{ object.preposition_count }} <small>(over
+                                        {{ object.sentence_count }} sentences)</small></td>
+                                  </tr>
+                                  <tr>
+                                    <td>Question Marks</td>
+                                    <td>{{ object.question_marks }}</td>
+                                  </tr>
+                                  <tr>
+                                    <td>Exclamations</td>
+                                    <td>{{ object.exclamation_count }}</td>
+                                  </tr>
+
+                                </tbody>
+                              </table>
+                            </div>
+                            <div class="col-md-8">
+                              <div class="panel panel-primary">
+                                <div class="panel-heading">
+                                  <h3 class="panel-title">Construction</h3>
+                                </div>
+                                <div class="panel-body">
+                                  <p><strong>Example Sentence with Comma (random
+                                      selection)</strong></p>
+                                  <ul>
+
+                                    <li>{% if object.comma_example %}{{
+                                      object.comma_example }}{% else %}None
+                                      Available {% endif %}</li>
+
+                                  </ul>
+                                  {% if object.semicolon_sentences %}
+                                  <p><strong>Example Semicolon Sentence</strong></p>
+                                  <ul>
+
+                                    <li>{{ object.semicolon_example }}</li>
+                                  </ul>
+                                  {% endif %}
+                                  <p><strong>Example Questions Mark Usage</strong></p>
+                                  <ul>
+                                    <li>{% if object.question_example %}{{
+                                      object.question_example }} {% else %} None
+                                      Available {% endif %}</li>
+                                  </ul>
+                                  <p><strong>Example Exclamation</strong></p>
+                                  <ul>
+                                    <li>{% if object.exclamation_example %}{{
+                                      object.exclamation_example }} {% else %}
+                                      None Available {% endif %}</li>
+                                  </ul>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <p class="float-right"><a class="pull-right" href="#"
+                              title="Back to top">Back to top</a></p>
+                        </div>
+                      </section>
+
+                      <section id="spelling">
+                        <h1>Spelling and Grammar Convention</h1>
+                        <div class="container">
+
+                          <div class="row">
+                            {% if object.hard_spelling %}
+                            <div class="col-md-6">
+                              <h3>Correctly Spelled <small>(yet commonly
+                                  mispelled)</small> </h3>
+                              <p>
+                                {% for word in object.hard_spelling %}
+                                <span class="label label-success">{{ word }}</span>
+                                {% endfor %}
+                              </p>
+                            </div>
+                            {% endif %}
+
+                            <div class="col-md-6" id="unrecognized-words">
+                              <h3>Unrecognized Words <span class="label
+                                  label-warning">{{
+                                  object.unrecognized_words_count }}</span></h3>
+                              {% if object.unrecognized_words %}
+
+                              <p>
+                                {% for word in object.unrecognized_words %}
+                                <span class="label label-primary">{{ word }}</span>
+                                {% endfor %}
+                              </p>
+                              {% endif %}
+                            </div>
+
+
+
+                          </div>
+
+                          <div class="row">
+
+                            <div class="col-md-12">
+                              <div class="panel panel-primary">
+                                <div class="panel-heading">
+                                  <h3 class="panel-title">Grammar Assurance</h3>
+                                </div>
+                                <div class="panel-body">
+                                  <small>
+                                  {% if object.grammar_notes %}
+                                  {% for note in object.grammar_notes %}
+                                  <!--<p><strong>{{ note[0] }}</strong><p><strong>Message</strong>: {{ note[2] }}</p>
+                                     <p><strong>Context</strong>: <em>{{ note[1] }}</em></p>
+                                     {% if note[3] %} <p><strong>Possible Replacement(s)</strong>: {{ note[3] }}</p> {% endif %}-->
+                                    <p><strong>{{ note[2] }}</strong>: <em>{{ note[1] }}</em></p>
+
+                                    {% endfor %}
+                                    {% else %}
+                                    <p>No grammar messages.</p>
+                                    {% endif %}
+                                  </small>    
+                                  </div>
+                                </div>
+                              </div>
+
+
+                            </div>
+                            <div class="row">
+
+                              <div class="col-md-12">
+                                <div class="panel panel-primary">
+                                  <div class="panel-heading">
+                                    <h3 class="panel-title">The Tone-Deaf Linter</h3>
+                                  </div>
+                                  <div class="panel-body">
+                                    <small>
+                                    {% if object.lint_suggestions %}
+                                    {% for item in object.lint_suggestions %}
+                                    {% if "curly quotes" not in item[1] %}
+                                    <p><strong>{{ item[1] }}</strong>: <em>{{ item[2] }}</em></p>
+                                    
+                                    {% endif %}
+                                    {% endfor %}
+                                    {% else %}
+                                    <p>No linter messages</p>
+                                    {% endif %}
+                                  </small>
+                                  </div>
+                                </div>
+                              </div>
+
+                            </div>
+
+
+
+
+                            <div class="row">
+                              <div class="col-md-12">
+                                {% if object.cliches_in_text %}
+                                <h3>Cliched Phrases <small><span class="label
+                                      label-primary">{{ object.cliche_count }}</span></small></h3>
+                                <ul>
+                                  {% for cliche in object.cliches_in_text %}
+                                  <li>{{ cliche }}</li>
+                                  {% endfor %}
+                                </ul>
+                                <p class="float-right"><a class="pull-right"
+                                    href="#"
+                                    title="Back to top">Back to top</a></p>
+                                {% endif %}
+                              </div>
+
+
+
+
+
+                            </div>
+                          </div>
+<p class="hidden-print float-right"><a class="pull-right" href=$
+            title="Back to top">Back to top</a></p>
+
+                        </div>
+
+
+                      </section>
+
+                      <section id="sources">
+                        {% if object.close_matches %}
+                        <div class="container">
+                          <h1>Similiar Text on the Web</h1>
+
+                          <div class="container">
+
+
+                            <div class="row">
+
+                              <div class="col-md-12">
+
+                                <div class="panel panel-primary">
+                                  <div class="panel-heading">
+                                    <h3 class="panel-title">Sources &amp; Web
+                                      Relations</h3>
+                                  </div>
+                                  <div class="panel-body">
+                                    <ol>
+                                      {% for i in object.close_matches %}
+                                      <li><a href="{{ i }}" target="_blank"
+                                          title="close match to full text of
+                                          {{object.file_name}}">{{ i }}</a>
+                                        {% endfor %}
+                                      </ol>
+                                    </div>
+                                  </div>
+                                  <p class="float-right"><a class="pull-right"
+                                      href="#" title="Back to top">Back to top</a></p>
+
+                                </div>
+                              </div>
+                            </div><!--close container-->
+                            {% endif %}
+
+                          </div>
+
+                        </section>
+
+
+                <section id='Annotations'>
+
+               
+                  <div class="container">
+                        <h1 id="xray">Sentence X-Ray</h1>
+                            <div style="padding:10px" class="alert
+                              alert-info" role="alert">
+                              <button type="button" class="close"
+                                data-dismiss="alert" aria-label="Close"><span
+                                  aria-hidden="true">&times;</span></button><p>Hover
+                                over labels to examine sentence
+                                components.</p>
+                            </div>
+
+
+                                <!-- Nav tabs -->
+                              <ul class="nav nav-tabs">
+                                <li class="nav-item active"><a class="nav-link" href="#annotatedText" role="tab" data-toggle="tab">Style</a></li>
+                                <li class="nav-item"><a class="nav-link" href="#annotatedStructure" role="tab" data-toggle="tab">Structure [BETA]</a></li>
+                              </ul>
+
+
+
+
+
+                              <!-- Tab panes -->
+                                <div class="tab-content">
+
+                                    <div class="tab-pane container active" id="annotatedText">
+                                        <div class="row">
+                                          <div class="col-md-12">
+
+                                              <div class="essay">
+                                                <table class="table table-striped">
+                                                  <tbody>
+                                                    {% for sentence in object.annotatedText
+                                                    %}
+                                                    <tr><td><p>{{ sentence[0]|safe }}</p></td></tr>
+                                                    {% endfor %}
+                                                  </tbody>
+                                                </table>
+                                              </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                                    <div class="tab-pane container fade" id="annotatedStructure">
+                                        <div class="row">
+                                          <div class="col-md-12">
+
+                                            <div class="essay">
+                                                <table class="table table-striped">
+                                                  <tbody>
+                                                    {% for sentence in object.annotatedStructure
+                                                    %}
+                                                    <tr><td><p>{{ sentence[0]|safe }}</p></td></tr>
+                                                    {% endfor %}
+                                                  </tbody>
+                                                </table>
+                                            </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- begin back to top-->
+                              <div class="row">
+                                <div class="col-md-12>">
+                                  <p class="float-right"><a class="pull-right"
+                                      href="#" title="Back to top">Back to top</a></p>
+                                </div>
+                              </div>
+                            <!--end back to top-->
+
+          </div><!--container-->
+        </section>
+
+                        <!--<section id='annotatedText'>
+        <style>
+          .essay p{
+            font-size: 100%;
+            fontface: sans-serif;
+            line-height: 200%;
+            padding: 10px;
+          }
+        </style>
+
+        <div class='row'>
+            <div class="container">
+          <h1>Sentence X-Ray</h1>
+          <div style="padding:10px" class="alert alert-info" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><p>Hover over labels to examine sentence components.</p>
+          </div>
+
+          {{ object.markedupText|safe }}
+
+
+        <p class="pull-right"><a href="#" title="Return to top">Back to top</a></p>
+        </div>
+      </div>
+  </section>-->
+                        <section id="metadata">
+                          <div class="container">
+                            <h1>Metadata</h1>
+                            <div class="container">
+                            <div class="row">
+                              <div class="col-md-6">
+                                <table class="table table-hover">
+                                  <tr><td>File Type</td><td>{{
+                                      object.file_type }}</td></tr>
+                                  <tr><td>File Size (kB)</td><td>{{
+                                      object.file_kbytes }}</td></tr>
+                                  <tr><td>Seconds to Process</td><td>{{
+                                      object.end }}</td></tr>
+                                  <tr><td>Words Processed Per Second</td><td>{{
+                                      object.word_count / object.end }}</td></tr>
+                                </table>
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="col-md-12>">
+                                <p class="float-right"><a class="pull-right"
+                                    href="#" title="Back to top">Back to top</a></p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        </section>
+</div>
+                      {% endblock %}
+

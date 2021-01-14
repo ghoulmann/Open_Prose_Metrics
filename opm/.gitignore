@@ -1,0 +1,11 @@
+config.json
+*.pyc
+*.*.bak
+tagger.pkl
+*.mp3
+*.db
+*.lock
+instance/
+log/
+.env
+*.pyc

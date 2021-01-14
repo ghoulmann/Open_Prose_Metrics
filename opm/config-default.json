@@ -1,0 +1,33 @@
+{
+    "aylien": {
+        "apikey": "",
+        "appid": "",
+        "url": "https://api.rosette.com/rest/v1/"
+    },
+    "rosette": {
+        "apikey": "",
+        "url": "https://api.rosette.com/rest/v1/"
+    },
+    "text-processing": {
+        "apikey": null
+    },
+    "textgain": {
+        "apikey": null,
+        "endpoints": {
+            "age": "https://api.textgain.com/1/age",
+            "concepts": "https://api.textgain.com/1/concepts",
+            "education": "https://api.textgain.com/1/education",
+            "gender": "https://api.textgain.com/1/gender",
+            "genre": "https://api.textgain.com/1/genre",
+            "personality": "https://api.textgain.com/1/personality",
+            "sentiment": "https://api.textgain.com/1/sentiment",
+            "syllables": "https://api.textgain.com/1/syllables",
+            "tag": "https://api.textgain.com/1/tag"
+        },
+        "language": "https://api.textgain.com/1/language",
+        "url": "https://api.textgain.com/1/"
+    },
+    "textrazor": {
+        "apikey": ""
+    }
+}

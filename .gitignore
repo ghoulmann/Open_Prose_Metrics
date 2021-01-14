@@ -1,0 +1,7 @@
+.vagrant
+*.pyc
+*/config.json
+*.pkl
+app/
+mod_wsgi-4.7.1/
+file*

@@ -1,0 +1,91 @@
+Exception on /feedback/2020-01-26 19:59/tts/ [GET]
+Traceback (most recent call last):
+  File "/var/www/html/extraeyes/virtualenv/lib/python3.7/site-packages/flask/app.py", line 2446, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/var/www/html/extraeyes/virtualenv/lib/python3.7/site-packages/flask/app.py", line 1951, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/var/www/html/extraeyes/virtualenv/lib/python3.7/site-packages/flask/app.py", line 1820, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/var/www/html/extraeyes/virtualenv/lib/python3.7/site-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/var/www/html/extraeyes/virtualenv/lib/python3.7/site-packages/flask/app.py", line 1949, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/var/www/html/extraeyes/virtualenv/lib/python3.7/site-packages/flask/app.py", line 1935, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/var/www/html/extraeyes/app/app.py", line 464, in proofread
+    return render_template('proofread-w-tts.html', object=Doc, timestamp=timestamp)
+  File "/var/www/html/extraeyes/virtualenv/lib/python3.7/site-packages/flask/templating.py", line 138, in render_template
+    ctx.app.jinja_env.get_or_select_template(template_name_or_list),
+  File "/usr/local/lib/python3.6/dist-packages/jinja2/environment.py", line 869, in get_or_select_template
+    return self.get_template(template_name_or_list, parent, globals)
+  File "/usr/local/lib/python3.6/dist-packages/jinja2/environment.py", line 830, in get_template
+    return self._load_template(name, self.make_globals(globals))
+  File "/usr/local/lib/python3.6/dist-packages/jinja2/environment.py", line 804, in _load_template
+    template = self.loader.load(self, name, globals)
+  File "/usr/local/lib/python3.6/dist-packages/jinja2/loaders.py", line 125, in load
+    code = environment.compile(source, name, filename)
+  File "/usr/local/lib/python3.6/dist-packages/jinja2/environment.py", line 591, in compile
+    self.handle_exception(exc_info, source_hint=source_hint)
+  File "/usr/local/lib/python3.6/dist-packages/jinja2/environment.py", line 780, in handle_exception
+    reraise(exc_type, exc_value, tb)
+  File "/usr/local/lib/python3.6/dist-packages/jinja2/_compat.py", line 37, in reraise
+    raise value.with_traceback(tb)
+  File "/var/www/html/extraeyes/app/templates/proofread-w-tts.html", line 45, in template
+    <li><a title="Save MP3" href="{{ os.path.dirname(os.path.realpath(__file__))  + object.tts_basename) }}"><span style="vertical-align:top" class="glyphicon glyphicon-download hidden-print"></span></a></li>
+  File "/usr/local/lib/python3.6/dist-packages/jinja2/environment.py", line 497, in _parse
+    return Parser(self, source, name, encode_filename(filename)).parse()
+  File "/usr/local/lib/python3.6/dist-packages/jinja2/parser.py", line 901, in parse
+    result = nodes.Template(self.subparse(), lineno=1)
+  File "/usr/local/lib/python3.6/dist-packages/jinja2/parser.py", line 883, in subparse
+    rv = self.parse_statement()
+  File "/usr/local/lib/python3.6/dist-packages/jinja2/parser.py", line 130, in parse_statement
+    return getattr(self, 'parse_' + self.stream.current.value)()
+  File "/usr/local/lib/python3.6/dist-packages/jinja2/parser.py", line 268, in parse_block
+    node.body = self.parse_statements(('name:endblock',), drop_needle=True)
+  File "/usr/local/lib/python3.6/dist-packages/jinja2/parser.py", line 165, in parse_statements
+    result = self.subparse(end_tokens)
+  File "/usr/local/lib/python3.6/dist-packages/jinja2/parser.py", line 883, in subparse
+    rv = self.parse_statement()
+  File "/usr/local/lib/python3.6/dist-packages/jinja2/parser.py", line 130, in parse_statement
+    return getattr(self, 'parse_' + self.stream.current.value)()
+  File "/usr/local/lib/python3.6/dist-packages/jinja2/parser.py", line 213, in parse_if
+    'name:endif'))
+  File "/usr/local/lib/python3.6/dist-packages/jinja2/parser.py", line 165, in parse_statements
+    result = self.subparse(end_tokens)
+  File "/usr/local/lib/python3.6/dist-packages/jinja2/parser.py", line 875, in subparse
+    add_data(self.parse_tuple(with_condexpr=True))
+  File "/usr/local/lib/python3.6/dist-packages/jinja2/parser.py", line 620, in parse_tuple
+    args.append(parse())
+  File "/usr/local/lib/python3.6/dist-packages/jinja2/parser.py", line 432, in parse_expression
+    return self.parse_condexpr()
+  File "/usr/local/lib/python3.6/dist-packages/jinja2/parser.py", line 437, in parse_condexpr
+    expr1 = self.parse_or()
+  File "/usr/local/lib/python3.6/dist-packages/jinja2/parser.py", line 450, in parse_or
+    left = self.parse_and()
+  File "/usr/local/lib/python3.6/dist-packages/jinja2/parser.py", line 459, in parse_and
+    left = self.parse_not()
+  File "/usr/local/lib/python3.6/dist-packages/jinja2/parser.py", line 470, in parse_not
+    return self.parse_compare()
+  File "/usr/local/lib/python3.6/dist-packages/jinja2/parser.py", line 474, in parse_compare
+    expr = self.parse_math1()
+  File "/usr/local/lib/python3.6/dist-packages/jinja2/parser.py", line 500, in parse_math1
+    right = self.parse_concat()
+  File "/usr/local/lib/python3.6/dist-packages/jinja2/parser.py", line 507, in parse_concat
+    args = [self.parse_math2()]
+  File "/usr/local/lib/python3.6/dist-packages/jinja2/parser.py", line 517, in parse_math2
+    left = self.parse_pow()
+  File "/usr/local/lib/python3.6/dist-packages/jinja2/parser.py", line 528, in parse_pow
+    left = self.parse_unary()
+  File "/usr/local/lib/python3.6/dist-packages/jinja2/parser.py", line 547, in parse_unary
+    node = self.parse_postfix(node)
+  File "/usr/local/lib/python3.6/dist-packages/jinja2/parser.py", line 672, in parse_postfix
+    node = self.parse_subscript(node)
+  File "/usr/local/lib/python3.6/dist-packages/jinja2/parser.py", line 700, in parse_subscript
+    next(self.stream)
+  File "/usr/local/lib/python3.6/dist-packages/jinja2/lexer.py", line 359, in __next__
+    self.current = next(self._iter)
+  File "/usr/local/lib/python3.6/dist-packages/jinja2/lexer.py", line 562, in wrap
+    for lineno, token, value in stream:
+  File "/usr/local/lib/python3.6/dist-packages/jinja2/lexer.py", line 683, in tokeniter
+    filename)
+jinja2.exceptions.TemplateSyntaxError: unexpected ')'

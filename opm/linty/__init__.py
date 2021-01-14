@@ -1,0 +1,1 @@
+from linty.linty import lint_text

@@ -1,0 +1,1 @@
+from forcast_index.forcast import forcast
