@@ -3,7 +3,7 @@ import os
 
 class BaseConfig(object):
     'Base config class'
-    SECRET_KEY = 'A random secret key'
+    basedir = os.path.abspath(os.path.dirname(__file__)
     DEBUG = True
     TESTING = False
     #TMP_DIR = 'tmp'
