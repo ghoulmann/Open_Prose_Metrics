@@ -8,7 +8,7 @@ document = 'util/12thGrade-informationExplanatory.txt'
 report = Sample(document)
 
 db = shelve.open(os.path.join(path, 'shelve.db'))
-Print("Writing shelve.db to " + str(os.path.join(path, 'shelve.db'))
+print("Writing shelve.db to " + str(os.path.join(path, 'shelve.db'))
 db['example'] = report
 
 db.close()
