@@ -6,7 +6,7 @@ path = pathlib.Path(__file__).parent.absolute()
 document = 'util/12thGrade-informationExplanatory.txt'
 
 report = Sample(document)
-db = shelve.open(os.path.join(path, 'shelve.db'))
+db = shelve.open(os.path.join(os.path, 'shelve.db'))
 
 db['example'] = report
 
