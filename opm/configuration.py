@@ -3,13 +3,13 @@ import os
 
 class BaseConfig(object):
     'Base config class'
-    basedir = os.path.abspath(os.path.dirname(__file__)
+    basedir = os.path.abspath(os.path.dirname(__file__))
     DEBUG = True
     TESTING = False
     #TMP_DIR = 'tmp'
     #UPLOAD_FOLDER = TMP_DIR
-    SHELVE_FILENAME = 'shelve.db'
-    SHELVE_LOCKFILE = 'shelve.db.lock'
+    SHELVE_FILENAME = os.path.join(basedir, 'shelve.db')
+    SHELVE_LOCKFILE = os.path.join(basedir,'shelve.db.lock')
     SESSION_TYPE = 'null'
     SESSION_PERMANENT = False
     SESSION_COOKIE_NAME = 'session'
