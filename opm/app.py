@@ -28,7 +28,7 @@ from tts.tts import TTS
 from unidecode import unidecode_expect_nonascii
 from presentation.presentation import FrontEnd
 from datetime import datetime
-
+import shelve
 app = Flask(__name__, static_url_path='/static')
 if "/var/www/" in os.path.abspath(__file__):
      app.config.from_object('configuration.ProductionConfig')
@@ -158,8 +158,7 @@ def show_example():
     # return redirect(url_for('feedback', timestamp = Doc.timestamp))
     # #else:
     #  #   return redirect(url_for('intro'))
-    db = get_shelve('c')
-    global Doc
+    db = get_shelve('shelve.db')
     Doc = db['example']
     return render_template('new_results.html', object=Doc)
 @app.route('/admin/shelve/')
