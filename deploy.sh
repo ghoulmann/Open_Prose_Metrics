@@ -70,8 +70,7 @@ echo "Pre-create Postagger (depends on stanford NER)"
 chown -R $APP_OWNER:$APP_GROUP $NER_DIR/stanford-ner
 cd $TARGET_DIR/opm && python postagger.py
 echo "Seeding Database and Testing Backend"
-cd $TARGET_DIR/opm
-python seed_database.py
+cd $TARGET_DIR/opm && python seed_database.py TARGET_DIR/opm/
 chown -R $APP_OWNER:$APP_GROUP $TARGET_DIR
 echo "Configuring Apache2"
 
