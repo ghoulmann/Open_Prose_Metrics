@@ -27,7 +27,7 @@ from flask_sitemap import Sitemap
 from tts.tts import TTS
 from unidecode import unidecode_expect_nonascii
 from presentation.presentation import FrontEnd
-
+from datetime import datetime
 
 app = Flask(__name__, static_url_path='/static')
 if "/var/www/" in os.path.abspath(__file__):
@@ -159,6 +159,7 @@ def show_example():
     # #else:
     #  #   return redirect(url_for('intro'))
     db = get_shelve('c')
+    global Doc
     Doc = db['example']
     return render_template('new_results.html', object=Doc)
 @app.route('/admin/shelve/')
@@ -263,7 +264,8 @@ def paste():
         Doc = read_document.Sample(prose, author, apis)
         Doc.administrator = administrator
         Doc.admin_notes = admin_notes
-        return redirect(url_for('feedback', timestamp=Doc.title))
+        Doc.timestamp = datetime.now()
+        return redirect(url_for('feedback', timestamp=Doc.timestamp))
     return render_template('paste.html')
 
 @app.route('/url/', methods=['GET', 'POST'])

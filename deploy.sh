@@ -59,7 +59,10 @@ chown -R $APP_OWNER:$APP_GROUP /var/log/extraeyes
 chown -R $APP_OWNER:$APP_GROUP /var/log/opm
 chown -R $APP_OWNER:$APP_GROUP /home/$APP_OWNER/.plotly
 chmod 775 /home/$APP_OWNER/.plotly
-chown -R $APP_OWNER:$APP_GROUP $TARGET_DIR
+
+#activate virtualenv
+source $VENV/bin/activate
+cd $TARGET_DIR/opm
 #nltk_data
 echo "Fetching NLTK data"
 python -m nltk.downloader -d /usr/share/nltk_data stopwords words punkt brown vader_lexicon averaged_perceptron_tagger maxent_ne_chunker #for ner
@@ -67,8 +70,11 @@ echo "Pre-create Postagger (depends on stanford NER)"
 chown -R $APP_OWNER:$APP_GROUP $NER_DIR/stanford-ner
 cd $TARGET_DIR/opm && python postagger.py
 echo "Seeding Database and Testing Backend"
-cd $TARGET_DIR/opm && python seed_database.py
+cd $TARGET_DIR/opm
+python seed_database.py
+chown -R $APP_OWNER:$APP_GROUP $TARGET_DIR
 echo "Configuring Apache2"
+
 cp $INSTALLER_DIR/opm-configs/etc/apache2/sites-available/*.conf /etc/apache2/sites-available/
 sed -i "s|{{ owner }}|$APP_OWNER|" /etc/apache2/sites-available/opm.conf
 sed -i "s|{{ group }}|$APP_GROUP|" /etc/apache2/sites-available/opm.conf
