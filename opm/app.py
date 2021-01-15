@@ -158,7 +158,7 @@ def show_example():
     # return redirect(url_for('feedback', timestamp = Doc.timestamp))
     # #else:
     #  #   return redirect(url_for('intro'))
-    db = get_shelve('shelve.db')
+    db = get_shelve('c')
     Doc = db['example']
     return render_template('new_results.html', object=Doc)
 @app.route('/admin/shelve/')
