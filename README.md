@@ -16,9 +16,9 @@ Python3, Flask, Apache2, mod_wsgi, stanford_ner, and NLTK are involved. The repo
 
 However, the other tools can be used to install on Ubuntu 18.04, or adapted for other releases and distros.
 
-![](/home/rik/test-opm-vagrant/open-prose-metrics/img/index.png)
+<img src="img/index.png">
 
-![](/home/rik/test-opm-vagrant/open-prose-metrics/img/concision-precision.png)
+<img src="img/concision-precision.png">
 
 ### Tested Environment
 
