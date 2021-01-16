@@ -166,6 +166,7 @@ def shelve():
     db = get_shelve('c')
     
     keys = list(db.keys())
+    
     return render_template('keys.html', keys = keys)
     
 @app.route('/admin/feedback/<key>', methods=['GET'])
@@ -181,7 +182,12 @@ def show_record(key):
     Doc = db[key]
     return render_template('new_results.html', object=Doc)
 
-
+@app.route('/admin/log/errors', methods=['GET'])
+def error_log():
+    with open('/var/log/opm/error.log') as log:
+        lines = log.readlines()
+    playback = reversed(lines)
+    return render_template('log.html', lines=playback)
 
 @app.route('/clear')
 def clearRawText(): 

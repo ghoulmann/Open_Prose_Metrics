@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+
+{% block page_content %}
+
+<table class="table table-striped">
+<tr><th>&nbsp;</th><th><span class="glyphicon glyphicon-inbox"></span>&amp; &amp; Error Log</th></tr>
+{% for line in lines %}
+<tr><td width="5%"><big><span data-toggle="tooltip" data-placement="top" title="Error Log Line" class="glyphicon glyphicon-flag"></span></big></td><td>{{ line }}</td></tr>
+{% endfor %} 
+
+
+</table>
+{% endblock %}
+{% endblock %}
