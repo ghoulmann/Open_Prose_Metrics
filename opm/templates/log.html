@@ -4,7 +4,7 @@
 {% block page_content %}
 
 <table class="table table-striped">
-<tr><th>&nbsp;</th><th><span class="glyphicon glyphicon-inbox"></span>&nbsp; &nbsp; Error Log</th></tr>
+<tr><th><span class="glyphicon glyphicon-inbox"></span></th><th>&nbsp; &nbsp; Error Log</th></tr>
 {% for line in lines %}
 <tr><td width="5%"><span data-toggle="tooltip" data-placement="top" title="Error Log Line" class="glyphicon glyphicon-flag"></span></td><td>{{ line }}</td></tr>
 {% endfor %} 
