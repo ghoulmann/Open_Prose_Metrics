@@ -1,8 +1,8 @@
 import sys, os
 import logging
 logging.basicConfig(stream=sys.stderr)
-PROJECT_FOLDER = '/var/www/html/open-prose-metrics'
-PROJECT_HOME = '/var/www/html/open-prose-metrics/opm'
+PROJECT_FOLDER = '{{ target }}'
+PROJECT_HOME = ' {{ app }}'
 activate_this = os.path.join(PROJECT_FOLDER, 'virtualenv', 'bin', 'activate_this.py')
 exec(compile(open(activate_this, "rb").read(), activate_this, 'exec'), dict(__file__=activate_this))
 
