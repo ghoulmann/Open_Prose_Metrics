@@ -9,3 +9,4 @@ instance/
 log/
 .env
 *.pyc
+virtualenv/

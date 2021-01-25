@@ -1,5 +1,5 @@
 2to3==1.0
-3to2==1.1.1
+#3to2==1.1.1
 argcomplete==1.10.0
 astropy==4.0
 attrs==19.3.0

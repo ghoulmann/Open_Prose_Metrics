@@ -624,6 +624,7 @@ class Sample:
             self.problemSents = self.sentenceStructures.problem_sents
             self.coordProblems = self.sentenceStructures.coord_start_sents
             self.gerundSents = self.sentenceStructures.gerund_sents
+            
             #self.word_syllables = self.syllables_per_word(self.word_tokens_no_punct)
             #Web Searches
             # web Results
@@ -638,9 +639,37 @@ class Sample:
 
 
 
+            #### For cheap evaluation report ####
+            # proportion unique words to all words
+            self.percent_unique = round((self.unique_words / self.word_count) * 100, 2)
+            
+            # nominalization (sort of)
+            self.percent_nominalization = round((((self.tion_word_list[1] + self.gerund_count) / 2) / self.word_count) * 100,2)
+            # average of total percent and total weak as percent of all sentences
+            self.percent_lardy = round(((((self.percent_passive_round + self.percent_weak_sentence_round) / 2)/ self.sentence_count) * 100), 2)
+            # Prepositions per sentence rounded
+            self.prepositions_per_sentence = round(self.preposition_count/self.sentence_count, 2)
+            # percent complex words
+            self.percent_complex = round((self.complex_word_cnt/self.word_count)*100, 2)
+            # percent modal of all words
+            self.percent_modal = round(((self.modals / self.word_count) * 100),2)
+            self.analysis = {'readability standard':self.readability_standard,
+                'reading difficulty':self.flesch_re_desc_str,
+                'percent unique': self.percent_unique,
+                'percent nominalized': self.percent_nominalization,
+                'percent_lardy': self.percent_lardy,
+                'Subject': self.subject,
+                'Top Word': self.top20words[0][0],
+                'Intro': self.intro,
+                'Conclusion': self.exit,
+                'adverbs to adjectives': self.adverb_to_adjective * 100,                
+                'percent complex words': self.percent_complex,
+                'percent modal': self.percent_modal,
+                'percent polysyllable': round((self.polysyllabcount/self.word_count) * 100, 2)            
+                }
 
             # Generate JSON representation
-            self.prepositions_per_sentence = round(self.preposition_count/self.sentence_count, 3)
+            
             #self.api_report = ObjDict()
 
             #self.api_report.identification = self.file_name + " " + self.time_stamp,
