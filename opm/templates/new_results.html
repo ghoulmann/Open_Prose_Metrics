@@ -23,7 +23,54 @@
       <h1><small>Report</small></h1>
       <h2>{% if object.file_name %}{{
   object.file_name[0:20] }} {% elif object.title %}{{ object.title[0:20] }}{% else
-  %} Pasted Text @ {{object.time_stamp}} {% endif %}</h2>      
+  %} Pasted Text @ {{object.time_stamp}} {% endif %}</h2>
+  
+            <div id="glance" class="container">
+              <!-- Button trigger modal -->
+              <button type="button" class="btn btn-primary btn-medium"
+                data-toggle="modal" data-target="#glance_modal">
+                At-A-Glance
+              </button>
+            
+              <!-- Modal -->
+              <div class="modal fade" id="glance_modal" tabindex="-1"
+                role="dialog" aria-labelledby="glance_modal">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close"
+                        data-dismiss="modal" aria-label="Close"><span
+                          aria-hidden="true">&times;</span></button>
+                      <h4 class="modal-title" id="glance_modalLabel">At-A-Glance</h4>
+                    </div>
+            
+                    <div class="modal-body">
+                      <p>Readability Standard: {{ object.analysis['readability standard'] }}</p>
+                      <p>Reading Difficulty: {{ object.analysis['reading difficulty'] }}</p>
+                      <hr />
+                      <p>Complex Words: {{ object.analysis['percent complex words'] }}%</p>
+                      <p>Polysyllable Words: {{ object.analysis['percent polysyllable'] }}%</p>
+                      <hr />
+                      <p>Extracted Subject: <em>{{ object.analysis['subject'] }}</em></p>
+                      <p>Most Frequent Word: <em>{{ object.analysis['top word'] }}</em></p>
+                      <hr />
+                      <p>Adverbs to Adjectives: {{ object.analysis['adverbs to adjectives'] }}</p>
+                      <p>Nominalizations: <em><small>at least</small></em> {{ object.analysis['percent nominalized'] }}%</p>
+                      <p>Percent Modal Verb: {{ object.percent_modal }}%</p>
+                      <p>Lardy Sentences: {{ object.percent_weak_sentence_round }}%</p>
+                      <p>Unique Words: {{ object.analysis['percent unique'] }}%</p>
+                      <p>Avg Prepositions per Sentence: {{ object.prepositions_per_sentence }}</p>
+                    </div>
+            
+            
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-default"
+                        data-dismiss="modal">Close</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
     </div>
 
    

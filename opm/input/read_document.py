@@ -657,14 +657,14 @@ class Sample:
                 'reading difficulty':self.flesch_re_desc_str,
                 'percent unique': self.percent_unique,
                 'percent nominalized': self.percent_nominalization,
-                'percent_lardy': self.percent_lardy,
-                'Subject': self.subject,
-                'Top Word': self.top20words[0][0],
-                'Intro': self.intro,
-                'Conclusion': self.exit,
-                'adverbs to adjectives': self.adverb_to_adjective * 100,                
-                'percent complex words': self.percent_complex,
-                'percent modal': self.percent_modal,
+                'percent lardy': self.percent_lardy,
+                'subject': self.subject,
+                'top word': self.top20words[0][0],
+                'intro': self.intro,
+                'conclusion': self.exit,
+                'adverbs to adjectives': round(self.adverb_to_adjective, 2),                
+                'percent complex words': round(self.percent_complex, 2),
+                'percent modal': round(self.percent_modal,2),
                 'percent polysyllable': round((self.polysyllabcount/self.word_count) * 100, 2)            
                 }
 
