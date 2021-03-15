@@ -764,7 +764,7 @@ class Sample:
         elif source['future'] > source['present'] and source['future'] > source['past']:
             return 'future'
         else:
-            return 'tense not determined'
+            return 'not available'
 
     def flesch_re_desc(self, score):
         if score < 30:
