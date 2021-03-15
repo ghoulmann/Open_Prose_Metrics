@@ -51,7 +51,7 @@
                       <p>Complex Words: {{ object.analysis['percent complex words'] }}%</p>
                       <p>Polysyllable Words: {{ object.analysis['percent polysyllable'] }}%</p>
                       <hr />
-		      <p>Average Sentence Length: {{ object.average_sentence_length }}</p>
+		      <p>Average Sentence Length: {{ object.avg_sentence_length }}</p>
 		      <hr />
                       <p>Extracted Subject: <em>{{ object.analysis['subject'] }}</em></p>
                       <p>Most Frequent Word: <em>{{ object.analysis['top word'] }}</em></p>
@@ -62,8 +62,10 @@
                       <p>Lardy Sentences: {{ object.percent_weak_sentence_round }}%</p>
                       <p>Unique Words: {{ object.analysis['percent unique'] }}%</p>
                       <p>Avg Prepositions per Sentence: {{ object.prepositions_per_sentence }}</p>
-			    <p>Verb Tense (Inferred): {{ object.overall_tense ))</p>
-                    </div>
+			    <hr />
+          <p>Verb Tense (Inferred): {{ object.overall_tense }}</p>
+
+                  </div>
 
 
                     <div class="modal-footer">
@@ -141,7 +143,7 @@
               <h3 class="panel-title">Subject <small>(determined by weight and
                   frequency)</small></h3>
             </div>
-            <div class="panel-body"><p align="center">{{ object.subject }}</p></div>
+            <div class="panel-body"><p align="center">{{ object.subject }}</div>
           </div>
         </div>
       </div>
@@ -764,9 +766,21 @@
 
             <section id="unity">
               <h1>Unity and Cohesion</h1>
-              <div class="container">
 
+<div class="container">
                 <div class="row">
+                    <div class="col-md-12">
+
+        					       <div class="panel panel-primary">
+        									       <div class="panel-heading">
+        													 <h3 class="panel-title">Subject [Inferred]</h3>
+                                   </div>
+        						                               <div class="panel-body"><p style="line-height:2.5">
+        																 {{ object.subject }}</p>
+        																 </div>
+        																 </div>
+
+        																 </div>
 
 
                   {% if object.longest_word_abstract %}
@@ -889,20 +903,10 @@
                             </div>
                           </div>
                           {% endif %}
-		
+
                         </div><!--End col-->
-                      </div><!--end row-->
-		      <div class="row">
-			  <div class col-md-12">
-					       <div class="panel panel-primary">
-									       <div class="panel-heading">
-													 <h3 class="panel-title">Subject [Inferred]</h3>
-						                               <div class="panel-body"><p style="line-height:2.5">
-																 <p>{{ object.subject }}</p>
-																 </div>
-																 </div>
-																 </div>
-																 </div>
+                    </div><!--end row-->
+
 
 
 
