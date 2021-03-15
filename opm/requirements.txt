@@ -1,5 +1,5 @@
 2to3==1.0
-3to2==1.1.1
+#3to2==1.1.1
 argcomplete==1.10.0
 astropy==4.0
 attrs==19.3.0
@@ -77,7 +77,7 @@ pdfminer==20191125
 pdfminer.six==20181108
 pexpect==4.7.0
 pickleshare==0.7.5
-Pillow==6.2.1
+Pillow==7.1.0
 plotly==2.7.0
 prompt-toolkit==3.0.2
 proselint==0.10.2

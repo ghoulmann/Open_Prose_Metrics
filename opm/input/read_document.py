@@ -304,7 +304,7 @@ class Sample:
             self.be_verb_analysis = self.count_be_verbs(self.sentence_tokens)
             self.be_verb_count = self.be_verb_analysis[0]
             self.be_verb_tally = self.be_verb_counting(self.word_tokens)
-            
+
             self.weak_sentences_all = self.be_verb_analysis[1]
             self.weak_sentences_set = set(self.weak_sentences_all)
             self.weak_sentences_count = len(self.weak_sentences_set)
@@ -313,8 +313,8 @@ class Sample:
                 self.be_verb_tally) / float(self.sentence_count), 2)
             self.weak_verbs_to_sentences_round = round(
                 self.weak_verbs_to_sentences, 2)
-            
-            
+
+
             self.no_punct = self.strip_punctuation(self.raw_text)
             self.word_tokens_no_punct = \
                 self.word_tokenize_no_punct(str(self.no_punct))
@@ -357,11 +357,11 @@ class Sample:
             self.readability_fleschkincaid = round(self.readability.FleschKincaidGradeLevel(), 2)
             self.readability_flesch_re = round(self.readability.FleschReadingEase(),2)
             self.readability_gunningfog = round(self.readability.GunningFogIndex(), 2)
-            
+
             self.readability_smog = round(self.readability.SMOGIndex(), 2)
             self.readability_lix = round(self.readability.LIX(), 2)
             self.readability_lix_grade = self.lix_grade(self.readability_lix)
-            
+
             self.readability_forcast = forcast(self)
             # textstat
             self.flesch_re_desc_str = self.flesch_re_desc(round(self.readability_flesch_re, 0))
@@ -373,13 +373,13 @@ class Sample:
             self.stats = self.readability.analyzedVars
             self.syllable_count = self.stats['syllable_cnt']
             self.complex_word_cnt = self.stats['complex_word_cnt']
-            self.avg_words_p_sentence = self.stats['avg_words_p_sentence']        
+            self.avg_words_p_sentence = self.stats['avg_words_p_sentence']
             # self.readability_smog_index = round(self.smog(str(self.raw_text)), 2)
             # self.readability_gunning = round(self.gunning_fog(str(self.raw_text)), 2) # doesn't work
             # self.readability_lix = round(self.lix(str(self.raw_text)), 2) # no result
             # self.readability_rix = round(self.rix(str(self.raw_text)), 2) # no result
             # self.readability_forcast = forcast(self)
-            
+
             self.lexile = getLexile(self.readability_fleschkincaid)
             # Back to original module
             self.avg_syllables_per_word = textstat.avg_syllables_per_word(
@@ -420,6 +420,15 @@ class Sample:
             self.proper_nouns = self.pos_isolate_fuzzy(
                 'NNP', self.pos_count_dict)
             self.cc_count = self.pos_isolate('CC', self.pos_count_dict)
+            # verb_tense: make function
+            self.tense = {}
+            self.tense['future'] = self.pos_counts['VBC'] +     self.pos_counts['VBZ']
+            self.tense['present'] = self.pos_counts['VBP'] +     self.pos_counts['VBZ'] + self.pos_counts['VBG']
+            self.tense['past'] = self.pos_counts['VBD'] +     self.pos_counts['VBN']
+            self.overall_tense = self.weigh_tense(self.tense)
+
+
+
             # commas
             self.commas = self.char_count(",")
             self.comma_sentences = self.list_sentences(",")
@@ -574,7 +583,7 @@ class Sample:
             # unity
             self.intro = self.sentence_tokens[0]
             self.exit = self.sentence_tokens[-1]
-            
+
             # noun phrases
             self.phrases = self.tag_phrases(TextBlob(str(self.raw_text)))
             #compound semicolon_sentences
@@ -624,6 +633,7 @@ class Sample:
             self.problemSents = self.sentenceStructures.problem_sents
             self.coordProblems = self.sentenceStructures.coord_start_sents
             self.gerundSents = self.sentenceStructures.gerund_sents
+
             #self.word_syllables = self.syllables_per_word(self.word_tokens_no_punct)
             #Web Searches
             # web Results
@@ -638,9 +648,37 @@ class Sample:
 
 
 
+            #### For cheap evaluation report ####
+            # proportion unique words to all words
+            self.percent_unique = round((self.unique_words / self.word_count) * 100, 2)
+
+            # nominalization (sort of)
+            self.percent_nominalization = round((((self.tion_word_list[1] + self.gerund_count) / 2) / self.word_count) * 100,2)
+            # average of total percent and total weak as percent of all sentences
+            self.percent_lardy = round(((((self.percent_passive_round + self.percent_weak_sentence_round) / 2)/ self.sentence_count) * 100), 2)
+            # Prepositions per sentence rounded
+            self.prepositions_per_sentence = round(self.preposition_count/self.sentence_count, 2)
+            # percent complex words
+            self.percent_complex = round((self.complex_word_cnt/self.word_count)*100, 2)
+            # percent modal of all words
+            self.percent_modal = round(((self.modals / self.word_count) * 100),2)
+            self.analysis = {'readability standard':self.readability_standard,
+                'reading difficulty':self.flesch_re_desc_str,
+                'percent unique': self.percent_unique,
+                'percent nominalized': self.percent_nominalization,
+                'percent lardy': self.percent_lardy,
+                'subject': self.subject,
+                'top word': self.top20words[0][0],
+                'intro': self.intro,
+                'conclusion': self.exit,
+                'adverbs to adjectives': round(self.adverb_to_adjective, 2),
+                'percent complex words': round(self.percent_complex, 2),
+                'percent modal': round(self.percent_modal,2),
+                'percent polysyllable': round((self.polysyllabcount/self.word_count) * 100, 2)
+                }
 
             # Generate JSON representation
-            self.prepositions_per_sentence = round(self.preposition_count/self.sentence_count, 3)
+
             #self.api_report = ObjDict()
 
             #self.api_report.identification = self.file_name + " " + self.time_stamp,
@@ -695,12 +733,39 @@ class Sample:
             self.plot_subj =  self.plot_subjectivity(self.sentence_tokens)
             self.plot_read = self.plot_readability_scores(self.readability_standard)
 
-
+            self.sentence_tense_list = self.get_sentence_tenses(self.sentence_tokens)
             #self.markedupText = self.markupText()
             self.annotatedText = annotateStyle(self)
             self.annotatedStructure = annotateStructure(self)
             self.end = time.time() - self.start
             print(("Time to Process Submission: %s" % self.end))
+
+    def get_sentence_tenses(self, sentence_tokens):
+        sentence_tense = []
+        for sentence in sentence_tokens:
+            sentence_tense.append((sentence, self.determine_tense_input(sentence)))
+        return sentence_tense
+
+    def determine_tense_input(self,sentence):
+        text = word_tokenize(sentence)
+        tagged = pos_tag(text)
+        tense = {}
+        tense["future"] = len([word for word in tagged if word[1] in ["VBC", "VBF"]])
+        tense["present"] = len([word for word in tagged if word[1] in ["VBP", "VBZ","VBG"]])
+        tense["past"] = len([word for word in tagged if word[1] in ["VBD", "VBN"]])
+        return self.weigh_tense(tense)
+
+
+    def weigh_tense(self, source):
+        if source['present'] > source['past'] and source['present'] > source['future']:
+            return 'present'
+        elif source['past'] > source['present'] and source['past'] > source['future']:
+            return 'past'
+        elif source['future'] > source['present'] and source['future'] > source['past']:
+            return 'future'
+        else:
+            return 'not available'
+
     def flesch_re_desc(self, score):
         if score < 30:
             return "Very Confusing"
@@ -794,16 +859,16 @@ class Sample:
                 int(math.ceil(self.readability_smog))]
         d = Counter(grade)
         final_grade = d.most_common(1)
-        
+
         score = final_grade[0][0]
         lower_score = int(score - 1)
         upper_score = lower_score + 1
-            
+
         return "{}{} and {}{} grade".format(
                 lower_score, self.get_grade_suffix(lower_score),
                 upper_score, self.get_grade_suffix(upper_score)
             )
-        
+
     def strip_punctuation(self, string_in):
         """
         Strip punctuation from string and make it lower case.
@@ -1254,7 +1319,7 @@ class Sample:
         return spline(subjlist, sentences, "Subjectivity")
     def plot_readability_scores(self, std):
         index_names = ['ARI', 'Coleman-Liau', 'Dale-Chall', 'Forcast','Flesch-Kincaid', 'Gunnning Fog', 'Linsear Write', 'SMOG Index']
-        
+
         scores = [self.readability_ari, self.readability_coleman_liau, self.readability_dale_chall, self.readability_forcast[0], self.readability_fleschkincaid, self.readability_gunningfog, self.readability_linsear_write, self.readability_smog]
         div = bar_h(index_names, scores)
         return div

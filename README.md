@@ -1,5 +1,7 @@
 # Open Prose Metrics
 
+## <https://opm.gonzotraining.com>
+
 Feed this web application a file, url, or paste with prose in English and it will provide data from which an assessment can be made, for the purposes of:
 
 * planning substantive revision
@@ -40,7 +42,7 @@ However, the other tools can be used to install on Ubuntu 18.04, or adapted for 
 
 File structure, rough deployment script, building mod_wsgi from source, and a sample apache2 virtual server conf for the application are provided below.
 
-demo server at <https://extraeyes.gonzotraining.com>. *interface is a bit different than what's provided here.*
+demo server at <https://opm.gonzotraining.com>. *interface is a bit different than what's provided here.*
 
 Install for your school or test env or home with this repo.
 

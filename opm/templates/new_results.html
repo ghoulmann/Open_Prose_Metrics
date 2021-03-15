@@ -13,23 +13,73 @@
 {% block content %}
 
 <div class="container">
- 
-  
+
+
 
 <div class="container">
     <div class="jumbotron">
       <img class="pull-right img-responsive hidden-print" src="/static/images/silcrow.png" width="10%">
-      
+
       <h1><small>Report</small></h1>
       <h2>{% if object.file_name %}{{
   object.file_name[0:20] }} {% elif object.title %}{{ object.title[0:20] }}{% else
-  %} Pasted Text @ {{object.time_stamp}} {% endif %}</h2>      
+  %} Pasted Text @ {{object.time_stamp}} {% endif %}</h2>
+
+            <div id="glance" class="container">
+              <!-- Button trigger modal -->
+              <button type="button" class="btn btn-primary btn-medium"
+                data-toggle="modal" data-target="#glance_modal">
+                At-A-Glance
+              </button>
+
+              <!-- Modal -->
+              <div class="modal fade" id="glance_modal" tabindex="-1"
+                role="dialog" aria-labelledby="glance_modal">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close"
+                        data-dismiss="modal" aria-label="Close"><span
+                          aria-hidden="true">&times;</span></button>
+                      <h4 class="modal-title" id="glance_modalLabel">At-A-Glance</h4>
+                    </div>
+
+                    <div class="modal-body">
+                      <p>Readability Standard: {{ object.analysis['readability standard'] }}</p>
+                      <p>Reading Difficulty: {{ object.analysis['reading difficulty'] }}</p>
+                      <hr />
+                      <p>Complex Words: {{ object.analysis['percent complex words'] }}%</p>
+                      <p>Polysyllable Words: {{ object.analysis['percent polysyllable'] }}%</p>
+                      <hr />
+		      <p>Average Sentence Length: {{ object.average_sentence_length }}</p>
+		      <hr />
+                      <p>Extracted Subject: <em>{{ object.analysis['subject'] }}</em></p>
+                      <p>Most Frequent Word: <em>{{ object.analysis['top word'] }}</em></p>
+                      <hr />
+                      <p>Adverbs to Adjectives: {{ object.analysis['adverbs to adjectives'] }}</p>
+                      <p>Nominalizations: <em><small>at least</small></em> {{ object.analysis['percent nominalized'] }}%</p>
+                      <p>Percent Modal Verb: {{ object.percent_modal }}%</p>
+                      <p>Lardy Sentences: {{ object.percent_weak_sentence_round }}%</p>
+                      <p>Unique Words: {{ object.analysis['percent unique'] }}%</p>
+                      <p>Avg Prepositions per Sentence: {{ object.prepositions_per_sentence }}</p>
+			    <p>Verb Tense (Inferred): {{ object.overall_tense ))</p>
+                    </div>
+
+
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-default"
+                        data-dismiss="modal">Close</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
     </div>
 
-   
+
   <section id="report_info">
 
-    
+
 
     <h1>About this Report </h1>
 
@@ -191,7 +241,7 @@
               <tr><td>Linsear Write</td><td>{{ object.readability_linsear_write
                   }}</td></tr>
               <tr><td>Gunning Fog</td><td>{{ object.readability_gunningfog }}</td></tr>
-               <tr><td>Forcast</td><td>{{ object.readability_forcast[0] }}</td></tr>   
+               <tr><td>Forcast</td><td>{{ object.readability_forcast[0] }}</td></tr>
               <tr><td>Automated Readability Index</td><td>{{
                   object.readability_ari }}</td></tr>
                   {% if object.readability_standard != "null" %}
@@ -220,7 +270,7 @@
                     object.readability_flesch_re }} ({{
                     object.flesch_re_desc_str }})</td></tr>
                 <tr><td>Lexile Approximation</td><td>{{ object.lexile }}</td></tr>
-                
+
               </tbody>
             </table>
             <div class="alert alert-warning" role="alert">
@@ -597,7 +647,7 @@
                             {{ object.weak_verbs_to_sentences }}
                             {% endif %}
                           </td>
-                        
+
                         </tr>
                         <tr>
                           <td>Other Modals <small>beyond the 23 helping verbs</small></td>
@@ -839,10 +889,20 @@
                             </div>
                           </div>
                           {% endif %}
-
+		
                         </div><!--End col-->
                       </div><!--end row-->
-
+		      <div class="row">
+			  <div class col-md-12">
+					       <div class="panel panel-primary">
+									       <div class="panel-heading">
+													 <h3 class="panel-title">Subject [Inferred]</h3>
+						                               <div class="panel-body"><p style="line-height:2.5">
+																 <p>{{ object.subject }}</p>
+																 </div>
+																 </div>
+																 </div>
+																 </div>
 
 
 
@@ -1004,7 +1064,7 @@
                                     {% else %}
                                     <p>No grammar messages.</p>
                                     {% endif %}
-                                  </small>    
+                                  </small>
                                   </div>
                                 </div>
                               </div>
@@ -1024,7 +1084,7 @@
                                     {% for item in object.lint_suggestions %}
                                     {% if "curly quotes" not in item[1] %}
                                     <p><strong>{{ item[1] }}</strong>: <em>{{ item[2] }}</em></p>
-                                    
+
                                     {% endif %}
                                     {% endfor %}
                                     {% else %}
@@ -1112,7 +1172,7 @@
 
                 <section id='Annotations'>
 
-               
+
                   <div class="container">
                         <h1 id="xray">Sentence X-Ray</h1>
                             <div style="padding:10px" class="alert
@@ -1129,6 +1189,7 @@
                               <ul class="nav nav-tabs">
                                 <li class="nav-item active"><a class="nav-link" href="#annotatedText" role="tab" data-toggle="tab">Style</a></li>
                                 <li class="nav-item"><a class="nav-link" href="#annotatedStructure" role="tab" data-toggle="tab">Structure [BETA]</a></li>
+                                <li class="nav-item"><a class="nav-link" href="#sentenceTenses" role="tab" data-toggle="tab">Verb Tense [Inferred]</a></li>
                               </ul>
 
 
@@ -1170,6 +1231,29 @@
                                                   </tbody>
                                                 </table>
                                             </div>
+                                    </div>
+                                </div>
+                            </div>
+                                    <div class="tab-pane container fade" id="sentenceTenses">
+                                        <div class="row">
+                                           <div class="col-md-12">
+
+                                            <div class="essay">
+                                                <div class="container"><p>&nbsp;</p>
+                                                    <p>
+                                                    <mark><small>Overall Tense:</small> &nbsp; {{ object.overall_tense }}</mark></p></div>
+                                                <table class="table table-striped">
+                                                    <tbody>
+                                                        {% for sentence in object.sentence_tense_list %}
+
+                                                        <tr><td><p>{{ sentence[0] }}</p></td><td><p><strong><mark>{{ sentence[1] }}</mark></strong></p></td></tr>
+                                                        {% endfor %}
+
+                                                     </tbody>
+                                                </table>
+                                            </div>
+
+
                                     </div>
                                 </div>
                             </div>
@@ -1238,4 +1322,3 @@
                         </section>
 </div>
                       {% endblock %}
-

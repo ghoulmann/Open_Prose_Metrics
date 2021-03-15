@@ -5,3 +5,4 @@
 app/
 mod_wsgi-4.7.1/
 file*
+virtualenv/
