@@ -5,10 +5,15 @@
 
 
 {% block content %}
-
+<style>
+  body {
+  padding:5px;
+  line-height:1.55;
+}
+</style>
   <div class="container">
     <div class="jumbotron">
-      <img class="pull-right img-responsive" src="/static/images/logo.png" width="10%">
+      <img class="pull-right img-responsive" src="static/images/logo.png" width="10%">
       <h1>Open Prose Metrics</h1>
 
       <p>Upload an essay for analysis <small>(<strong>.docx</strong>, .txt, .odt, .doc, .pdf, .rtf).</small></p>
@@ -23,7 +28,7 @@
       </div>
 
     </div>
-   
+
   <div class="container">
   {% with messages = get_flashed_messages(with_categories=True) %}
   {% if messages %}
@@ -67,9 +72,9 @@
         <li>Records progress in a written artifact over the course of the writing process.</li>
         <li>Capture the development of a writer's skills over the course of a term.</li>
         </ul>
-        
-        
-      
+
+
+
         </div>
         <div class="col-md-4">
           <h2>Context</h2>
@@ -79,9 +84,9 @@
         <div class="col-md-4">
           <h2>Coverage</h2>
           <p>The following exemplify the scope of written expression, written mechanics, and rhetorical concerns the tools can address:</p>
-            
+
             <ul>
-              
+
               <li>Sentence structure and variety</li>
               <li>Readability Indices as indicators of vocabliary acquisition, sentence boundary conventions, etc</li>
               <li>Personalization/objectivity</li>
@@ -91,9 +96,9 @@
               <li>Concision and wordiness, including deliberated use of passive, weak and modal verbs</li>
               <li>Precision and word choice</li>
               <li>Parts-of-speech distribution</li>
-              
+
               </ul>
-            
+
           </div>
         </div>
     </div>

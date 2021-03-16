@@ -2,13 +2,13 @@
 
 {% block content %}
 
-<div style="margin-top:70px"class="container">
+<div style="margin-top:70px" class="container">
         <!-- <noscript>JavaScript is off. Please enable to view full site.</noscript> -->
 
 <div class="row">
 
     <h1>Upload New File, Please.</h1>
-        <div class="col-md-6">
+        <div class="col-md-8">
 
             <div class="alert alert-warning">This tool evaluates English
                 texts only.</div>
@@ -30,14 +30,14 @@
                     <div id="keep hidden">
                         <!--form check to stop bots -->
                     <label hidden id="email2">Email: </label><input hidden id="email_add" name="email_add"></label>
-                    
+
                     </div>
 
                     <div class="form-group">
                       <label for="description">Description or Category</label>
                       <input type="text text-muted" id="description" class="form-control" name="description" placeholder="Not specified"  />
                   </div>
-                    
+
                     <div class="form-group">
                             <label>Select File <span class="label label-primary">Required</span></label>
                             <p><input type=file class="form-control-file" name=file id="file" required /></p>
@@ -58,16 +58,16 @@
 <!--        Rely on external resources (extended features and results)-->
                       </label>
                     </div>
-                    
+
                 <p><button class="btn btn-primary " type="submit" id="submitButton">Submit</button>&nbsp;<span id="spinner"><img src="static/images/giphy2.gif" width="15%" /></span></p>
             </form>
         </div>
-        <div class="col-md-6">
-          <img class="img-responsive" src="/static/images/logo.png" class="img img-responsive pull-right">
+        <div class="col-md-3">
+          <img class="img-responsive" style="float:right" src="/static/images/logo.png" width=35% class="img img-responsive pull-right">
+         </div>
+       </div><!-- END ROW -->
+     </div><!-- CLOSE CONTAINER-->
 
-    </div><!-- END ROW -->
-
-</div><!-- CLOSE CONTAINER-->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
 
 <script>
