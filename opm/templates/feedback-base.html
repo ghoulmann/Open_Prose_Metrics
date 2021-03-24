@@ -11,22 +11,26 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
     {{super()}}
     {{fixes.ie8()}}
-    <link rel="stylesheet" href="{{ bootstrap_find_resource('bootstrap.css', 'cyborg', local=False) }}"
-      <link rel="stylesheet" href="/static/styles/peer.css">
-    
+    <!--<link rel="stylesheet" href="{{ bootstrap_find_resource('bootstrap.css', 'cyborg', local=False) }}"-->
+    <link rel="stylesheet" href="/static/styles/peer.css">
 
-    
+
+
     <style>
+
     body {
         min-height: 2000px;
+        padding:5px;
         padding-top: 70px;
+
+        line-height:1.7;
     }
     .navbar {
         margin-bottom: 0px;
     }
     </style>
 {% endblock %}
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>  
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 {% block navbar %}
 <nav class="navbar navbar-default navbar-fixed-top">
   <div class="container-fluid">
@@ -57,16 +61,16 @@
         <li><a href="#prescription">Style<span class="sr-only"></span></a></li>
         <li><a href="#spelling">Convention<span class="sr-only"></span></a></li>
         <li><a href="#xray">Sentences<span class="sr-only"></span></a></li>
-        
+
 
         <!--<li role="separator" class="divider"></li>-->
-        
-        
-        
+
+
+
       </ul>
       <div class="navbar navbar-right">
-        
-        
+
+
       <ul class="nav navbar-nav">
         <!--<li><a title="Save" href = "{{ "/feedback/" + object.time_stamp + "/shelve/" }}"><span style="padding:15px; font-size:25px; vertical-align:top" {{ icon |safe}} </span> </a></li>-->
         <li><a title="Save" href="{{ "/feedback/" + object.time_stamp + "/shelve/" }}">{{ icon |safe}}</a></li>
