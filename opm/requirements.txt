@@ -24,7 +24,7 @@ docx2txt==0.8
 dominate==2.4.0
 EbookLib==0.17.1
 extract-msg==0.23.1
-Flask==1.1.1
+Flask==2.2.5
 Flask-Bootstrap==3.3.7.1
 Flask-DotEnv==0.1.2
 flask-nav==0.6
