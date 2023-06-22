@@ -30,7 +30,7 @@ Flask-DotEnv==0.1.2
 flask-nav==0.6
 Flask-Shelve==0.1.1
 flask-sitemap
-future==0.18.2
+future==0.18.3
 futures==3.1.1
 gensim==3.8.1
 google==2.0.1
