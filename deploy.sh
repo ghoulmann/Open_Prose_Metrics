@@ -10,8 +10,12 @@ VENV="/var/www/html/open-prose-metrics/virtualenv"
 NER_DIR="/usr/share"
 NLTK_DATA_DIR="/usr/share/nltk_data"
 
+apt update && apt install jq curl -y
+
+tz=$(curl https://geoip.kde.org/v1/calamares | jq -r '.time_zone')
+
 # dpkg-reconfigure tzdata (automation?)
-ln -fs /usr/share/zoneinfo/US/Eastern /etc/localtime && dpkg-reconfigure -f noninteractive tzdata
+ln -fs /usr/share/zoneinfo/${tz} /etc/localtime && dpkg-reconfigure -f noninteractive tzdata
 
 # Repository - General
 echo "Install from Ubuntu Package Manager"
