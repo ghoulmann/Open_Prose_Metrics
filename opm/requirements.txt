@@ -85,7 +85,7 @@ ptyprocess==0.6.0
 py-readability-metrics==1.4.3
 pyasn1==0.4.8
 #pyasn1-modules==0.2.8
-pycryptodome==3.9.4
+pycryptodome==3.19.1
 pyenchant==2.0.0
 Pygments==2.15.0
 pyparsing==2.4.6
